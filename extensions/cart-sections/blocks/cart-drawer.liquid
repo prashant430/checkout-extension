@@ -1,0 +1,69 @@
+<div class="cart-drawer-my">
+<div class="cart-drawer-data">
+<div class="drawer-header">
+<h1>Cart ● {{ item.count }}</h1>
+</div>
+<div class="items">
+{% for item in cart.items %}
+<div class="item" data-line-item-id="{{ item.id }}" data-variant-id="{{ item.id }}" data-line-item-key="{{ item.key }}">
+<div class="item-container">
+<a class="item-image-anchor" href="{{ item.url }}">
+<img alt="{{ item.title }}" src="{{ item.image | image_url: width: 300 }}">
+</a>
+<div class="main">
+<div class="main-top">
+<div class="main-top-left">
+<h3 class="title">
+<a href="{{ item.url }}">{{ item.title }}</a>
+</h3>
+
+{%- if item.original_price != item.final_price -%}
+    <div class="cart-item__discounted-prices">
+      <span class="visually-hidden">
+        {{ 'products.product.price.regular_price' | t }}
+      </span>
+      <s class="cart-item__old-price product-option">
+        {{- item.original_price | money -}}
+      </s>
+      <span class="visually-hidden">
+        {{ 'products.product.price.sale_price' | t }}
+      </span>
+      <strong class="cart-item__final-price product-option">
+        {{ item.final_price | money }}
+      </strong>
+    </div>
+  {%- else -%}
+    <div class="product-option">
+      {{ item.original_price | money }}
+    </div>
+  {%- endif -%}
+
+</div>
+<button type="button" class="remove" aria-label="remove Breville Smart Grinder Pro Coffee Grinder">
+<svg width="9" viewBox="0 0 10 10"><path d="M9.677 8.118a1.102 1.102 0 11-1.559 1.56L5 6.558 1.882 9.677a1.102 1.102 0 11-1.56-1.559L3.442 5 .323 1.882A1.102 1.102 0 111.882.322L5 3.442 8.118.323a1.102 1.102 0 111.56 1.559L6.558 5l3.118 3.118z" fill="#cacaca" fill-rule="nonzero"></path></svg>
+</button>
+</div>
+<div class="main-bottom">
+<div class="quantity-selector">
+<button type="button" aria-label="decrease quantity"><svg width="10" viewBox="0 0 12 2" xmlns="http://www.w3.org/2000/svg"><path d="M11.25 0H.75C.3 0 0 .4 0 1s.3 1 .75 1h10.5c.45 0 .75-.4.75-1s-.3-1-.75-1z" fill="#7A7A7A" fill-rule="nonzero"></path></svg></button>
+<input type="text" value="{{ item.quantity }}">
+<button type="button" aria-label="increase quantity"><svg width="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M11 5H7V1a1 1 0 00-2 0v4H1a1 1 0 000 2h4v4a1 1 0 002 0V7h4a1 1 0 000-2z" fill="currentColor" fill-rule="nonzero"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div> 
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "target": "section",
+  "settings": [
+  ]
+}
+{% endschema %}
